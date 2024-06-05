@@ -59,7 +59,7 @@ class _HomepageState extends State<Homepage> {
                   InAppWebView(
                     initialUrlRequest: URLRequest(
                         url: WebUri(
-                            'https://cloudmvc.clouderp.com.bd/app/views/sec_mobile_app')),
+                            'https://cloudmvc.clouderp.com.bd/app/views/sec_mobile_app/index.php')),
                     initialSettings: InAppWebViewSettings(
                       javaScriptEnabled: true,
                       mediaPlaybackRequiresUserGesture: false,
