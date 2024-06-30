@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -98,13 +100,11 @@ class _HomepageState extends State<Homepage> {
                       _webViewController = controller;
                     },
                     onLoadStart: (controller, url) {
-                      _startLocationPermissionCheck();
                       setState(() {
                         _isLoading = true;
                       });
                     },
                     onLoadStop: (controller, url) {
-                      _startLocationPermissionCheck();
                       setState(() {
                         _isLoading = false;
                       });
@@ -124,6 +124,9 @@ class _HomepageState extends State<Homepage> {
                 if (_noInternetError)
                   Center(
                     child: Container(
+                      decoration: BoxDecoration(
+                          // color: Color(0xFF)
+                          ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -154,6 +157,7 @@ class _HomepageState extends State<Homepage> {
                           SizedBox(height: 16.0),
                           ElevatedButton(
                             onPressed: () {
+                              // Handle the "Try Again" button press
                               _reloadWebView();
                             },
                             child: Text('Try Again'),
