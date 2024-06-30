@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -16,17 +17,30 @@ class _HomepageState extends State<Homepage> {
   late InAppWebViewController _webViewController;
   bool _noInternetError = false;
   bool _isLoading = true;
+  Timer? _locationPermissionTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestPermissions();
+    _startLocationPermissionCheck();
+  }
+
+  @override
+  void dispose() {
+    _locationPermissionTimer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         if (await _webViewController.canGoBack()) {
-          // If WebView can go back, navigate back
           _webViewController.goBack();
-          return false; // Do not close the app
+          return false;
         }
-        return true; // Close the app
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -84,11 +98,13 @@ class _HomepageState extends State<Homepage> {
                       _webViewController = controller;
                     },
                     onLoadStart: (controller, url) {
+                      _startLocationPermissionCheck();
                       setState(() {
                         _isLoading = true;
                       });
                     },
                     onLoadStop: (controller, url) {
+                      _startLocationPermissionCheck();
                       setState(() {
                         _isLoading = false;
                       });
@@ -108,9 +124,6 @@ class _HomepageState extends State<Homepage> {
                 if (_noInternetError)
                   Center(
                     child: Container(
-                      decoration: BoxDecoration(
-                          // color: Color(0xFF)
-                          ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -141,7 +154,6 @@ class _HomepageState extends State<Homepage> {
                           SizedBox(height: 16.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Handle the "Try Again" button press
                               _reloadWebView();
                             },
                             child: Text('Try Again'),
@@ -163,14 +175,7 @@ class _HomepageState extends State<Homepage> {
       _noInternetError = false;
     });
 
-    // Reload the WebView
     _webViewController.reload();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _requestPermissions();
   }
 
   Future<void> _requestPermissions() async {
@@ -181,14 +186,23 @@ class _HomepageState extends State<Homepage> {
       print('Location permission granted');
     } else {
       print('Location permission denied');
-      // Handle denial of location permission, e.g., show a message to the user
     }
 
     if (cameraStatus == PermissionStatus.granted) {
       print('Camera permission granted');
     } else {
       print('Camera permission denied');
-      // Handle denial of camera permission, e.g., show a message to the user
     }
+  }
+
+  void _startLocationPermissionCheck() {
+    _locationPermissionTimer =
+        Timer.periodic(Duration(seconds: 5), (timer) async {
+      var serviceStatus = await Permission.location.serviceStatus;
+      if (serviceStatus == ServiceStatus.disabled) {
+        SystemNavigator.pop();
+        // SystemNavigator.pop();
+      }
+    });
   }
 }
