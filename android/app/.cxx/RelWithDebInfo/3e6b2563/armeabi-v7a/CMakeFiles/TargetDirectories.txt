@@ -1,0 +1,2 @@
+C:/Users/fahim/Desktop/android_Projects/salesautomation_V4/android/app/.cxx/RelWithDebInfo/3e6b2563/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/fahim/Desktop/android_Projects/salesautomation_V4/android/app/.cxx/RelWithDebInfo/3e6b2563/armeabi-v7a/CMakeFiles/rebuild_cache.dir

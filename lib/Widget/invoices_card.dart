@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:munafa/dto/invoice_payment_status_dto.dart';
-import 'package:munafa/models/invoice.dart';
+import 'package:salesautomation_V4/model/do_master.dart';
 
 class InvoiceCard extends StatelessWidget {
-  final InvoicePaymentStatusDTO invoice;
+  final DoMaster invoice;
 
   const InvoiceCard({Key? key, required this.invoice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Convert string doDate to DateTime
+    DateTime parsedDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(invoice.doDate);
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -27,27 +29,16 @@ class InvoiceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    invoice.invoiceId,
+                    invoice.doOfflineId.toString(),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  if (invoice.supplierName != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(
-                        invoice.supplierName!,
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
-                      DateFormat('dd MMM yyyy, HH:mm').format(invoice.invoiceDate),
+                      DateFormat('dd MMM yyyy, HH:mm').format(parsedDate), // Use parsed DateTime
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 12,
@@ -61,7 +52,7 @@ class InvoiceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '৳${invoice.invoiceAmount.toStringAsFixed(2)}',
+                  '৳${invoice.doNo}',
                   style: TextStyle(
                     color: Colors.red[400],
                     fontWeight: FontWeight.bold,

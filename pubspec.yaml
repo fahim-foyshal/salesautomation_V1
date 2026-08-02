@@ -1,4 +1,4 @@
-name: salesautomation_v1
+name: salesautomation_V4
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,6 +35,17 @@ dependencies:
   geolocator: ^10.1.0
   cupertino_icons: ^1.0.6
   location: ^6.0.2
+#  firebase_core: ^3.2.0
+#  firebase_database: ^11.0.3
+  dio: ^5.8.0+1
+  shared_preferences: ^2.2.3
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
+  google_fonts: ^6.2.1
+  dropdown_search: ^6.0.2
+  dropdown_button2: ^2.3.9
+  intl: ^0.20.2
+  app_settings: ^6.1.1
   
 
 dev_dependencies:
@@ -48,6 +59,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/logo.png
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: assets/logo.png  # Added this line to generate foreground
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,6 +85,7 @@ flutter:
     - assets/ERP-OLD-LOGO.png
     - assets/signal.png
     - assets/netbg.png
+    - assets/logo.png  # Make sure this exists
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

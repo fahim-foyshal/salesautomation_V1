@@ -87,31 +87,35 @@ class User {
   // Create a User object from a map (retrieved from a query)
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      username: map['username'],
-      password: map['password'],
-      userId: map['user_id'],
-      level: map['level'],
-      fname: map['fname'],
-      address: map['address'],
-      email: map['email'],
-      mobile: map['mobile'],
-      designation: map['designation'],
-      status: map['status'],
-      groupFor: map['group_for'],
-      dealerCode: map['dealer_code'],
-      productGroup: map['product_group'],
-      regionId: map['region_id'],
-      zoneId: map['zone_id'],
-      areaId: map['area_id'],
-      entryAt: map['entry_at'],
-      editAt: map['edit_at'],
-      lastLogin: map['last_login'],
-      lastRecovery: map['last_recovery'],
-      appLevel: map['app_level'],
-      targetVisit: map['target_visit'],
-      geoLock: map['geo_lock'],
-      geoLockMeter: map['geo_lock_meter'],
-      fgType: map['fg_type'],
+      username: map['username'] ?? '', // Provide default value for null
+      password: map['password'] ?? '', // Provide default value for null
+      userId: map['user_id'] != null ? int.tryParse(map['user_id'].toString()) : null, // Safely parse int
+      level: map['level'] != null ? int.tryParse(map['level'].toString()) : null, // Safely parse int
+      fname: map['fname'] ?? '', // Provide default value for null
+      address: map['address'] ?? '', // Provide default value for null
+      email: map['email'] ?? '', // Provide default value for null
+      mobile: map['mobile'] ?? '', // Provide default value for null
+      designation: map['designation'] ?? '', // Provide default value for null
+      status: (map['status'] != null && map['status'].isNotEmpty) ? map['status'] : 'Active', // Default to 'Active'
+      groupFor: map['group_for'] != null ? int.tryParse(map['group_for'].toString()) : null, // Safely parse int
+      dealerCode: map['dealer_code'] != null ? int.tryParse(map['dealer_code'].toString()) : null, // Safely parse int
+      productGroup: map['product_group'] ?? '', // Provide default value for null
+      regionId: map['region_id'] != null ? int.tryParse(map['region_id'].toString()) : null, // Safely parse int
+      zoneId: map['zone_id'] != null ? int.tryParse(map['zone_id'].toString()) : null, // Safely parse int
+      areaId: map['area_id'] != null ? int.tryParse(map['area_id'].toString()) : null, // Safely parse int
+      entryAt: map['entry_at'] ?? '', // Provide default value for null
+      editAt: map['edit_at'] ?? '', // Provide default value for null
+      lastLogin: map['last_login'] ?? '', // Provide default value for null
+      lastRecovery: map['last_recovery'] ?? '', // Provide default value for null
+      appLevel: map['app_level'] != null ? int.tryParse(map['app_level'].toString()) : null, // Safely parse int
+      targetVisit: map['target_visit'] != null ? int.tryParse(map['target_visit'].toString()) : null, // Safely parse int
+      geoLock: map['geo_lock'] != null ? int.tryParse(map['geo_lock'].toString()) : null, // Safely parse int
+      geoLockMeter: map['geo_lock_meter'] != null ? int.tryParse(map['geo_lock_meter'].toString()) : null, // Safely parse int
+      fgType: map['fg_type'] ?? '', // Provide default value for null
     );
   }
+
+
+
+
 }

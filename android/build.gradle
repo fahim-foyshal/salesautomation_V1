@@ -1,7 +1,23 @@
+buildscript {
+    ext.kotlin_version = '1.9.20' 
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://maven.google.com" }
+        maven { url "https://repo1.maven.org/maven2/" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Add any other dependencies here
+    }
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://maven.google.com" }
+        maven { url "https://repo1.maven.org/maven2/" }
     }
 }
 
